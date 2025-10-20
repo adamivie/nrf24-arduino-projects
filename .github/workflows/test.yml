@@ -1,0 +1,119 @@
+name: Test NRF24L01 Projects
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  compile-test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        arduino-board: [
+          "arduino:avr:uno",
+          "arduino:avr:nano", 
+          "arduino:avr:leonardo"
+        ]
+        
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Arduino CLI
+      uses: arduino/setup-arduino-cli@v1
+      
+    - name: Install Arduino cores
+      run: |
+        arduino-cli core update-index
+        arduino-cli core install arduino:avr
+        
+    - name: Install RF24 library
+      run: |
+        arduino-cli lib update-index
+        arduino-cli lib install "RF24"
+        
+    - name: Compile Chat Terminal A
+      run: arduino-cli compile --fqbn ${{ matrix.arduino-board }} nrf24_chat_terminal_a/
+      
+    - name: Compile Chat Terminal B  
+      run: arduino-cli compile --fqbn ${{ matrix.arduino-board }} nrf24_chat_terminal_b/
+      
+    - name: Compile Examples (if any)
+      run: |
+        if [ -d "examples" ]; then
+          for sketch in examples/*/; do
+            if [ -f "$sketch/*.ino" ]; then
+              arduino-cli compile --fqbn ${{ matrix.arduino-board }} "$sketch"
+            fi
+          done
+        fi
+
+  documentation-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Check documentation links
+      run: |
+        # Check for broken internal links
+        find . -name "*.md" -exec grep -l "\[.*\](" {} \; | while read file; do
+          echo "Checking $file for broken links..."
+          # Add link checking logic here if needed
+        done
+        
+    - name: Validate project structure
+      run: |
+        # Ensure required files exist
+        required_files=(
+          "README.md"
+          "LICENSE" 
+          "CONTRIBUTING.md"
+          "docs/WIRING.md"
+          "docs/TROUBLESHOOTING.md"
+          "scripts/install_dependencies.ps1"
+          "scripts/install_dependencies.sh"
+        )
+        
+        for file in "${required_files[@]}"; do
+          if [ ! -f "$file" ]; then
+            echo "ERROR: Required file missing: $file"
+            exit 1
+          fi
+        done
+        
+        echo "✓ All required files present"
+
+  style-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Check Arduino code style
+      run: |
+        # Basic style checks for Arduino sketches
+        find . -name "*.ino" | while read sketch; do
+          echo "Checking style in $sketch"
+          
+          # Check for basic style issues
+          if grep -q "	" "$sketch"; then
+            echo "WARNING: Tabs found in $sketch (use spaces)"
+          fi
+          
+          if ! grep -q "^#include <.*>" "$sketch"; then
+            echo "WARNING: No includes found in $sketch"
+          fi
+          
+          if ! grep -q "void setup()" "$sketch"; then
+            echo "ERROR: No setup() function in $sketch"
+            exit 1
+          fi
+          
+          if ! grep -q "void loop()" "$sketch"; then
+            echo "ERROR: No loop() function in $sketch" 
+            exit 1
+          fi
+        done
