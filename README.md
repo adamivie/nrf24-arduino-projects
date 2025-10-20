@@ -50,7 +50,7 @@ nrf24-arduino-projects/
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/nrf24-arduino-projects.git
+   git clone https://github.com/adamivie/nrf24-arduino-projects.git
    cd nrf24-arduino-projects
    ```
 
@@ -195,9 +195,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 🐛 **Issues:** [GitHub Issues](https://github.com/yourusername/nrf24-arduino-projects/issues)
-- 💬 **Discussions:** [GitHub Discussions](https://github.com/yourusername/nrf24-arduino-projects/discussions)
-- 📧 **Email:** your.email@example.com
+- 🐛 **Issues:** [GitHub Issues](https://github.com/adamivie/nrf24-arduino-projects/issues)
+- 💬 **Discussions:** [GitHub Discussions](https://github.com/adamivie/nrf24-arduino-projects/discussions)
+- 📧 **Email:** adamivie@example.com
 
 ## 🌟 Star History
 

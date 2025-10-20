@@ -274,7 +274,7 @@ When reporting issues, include:
 - [Arduino Forum](https://forum.arduino.cc/)
 - [Reddit r/arduino](https://www.reddit.com/r/arduino/)
 - [RF24 Library Issues](https://github.com/tmrh20/RF24/issues)
-- This project's [GitHub Issues](https://github.com/yourusername/nrf24-arduino-projects/issues)
+- This project's [GitHub Issues](https://github.com/adamivie/nrf24-arduino-projects/issues)
 
 ## 📚 Additional Resources
 
@@ -284,4 +284,4 @@ When reporting issues, include:
 
 ---
 
-**Still having issues?** Open an [issue](https://github.com/yourusername/nrf24-arduino-projects/issues) with your diagnostic output and wiring details!
+**Still having issues?** Open an [issue](https://github.com/adamivie/nrf24-arduino-projects/issues) with your diagnostic output and wiring details!

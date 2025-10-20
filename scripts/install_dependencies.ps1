@@ -121,7 +121,7 @@ function Show-NextSteps {
     Write-Host "3. Open Serial Monitor (9600 baud) to see output" -ForegroundColor Cyan
     Write-Host "4. Check docs/TROUBLESHOOTING.md if you have issues" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "Project documentation: https://github.com/yourusername/nrf24-arduino-projects" -ForegroundColor Green
+    Write-Host "Project documentation: https://github.com/adamivie/nrf24-arduino-projects" -ForegroundColor Green
     Write-Host ""
 }
 

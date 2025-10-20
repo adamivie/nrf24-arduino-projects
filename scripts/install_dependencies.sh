@@ -161,7 +161,7 @@ show_next_steps() {
     print_color $CYAN "3. Open Serial Monitor (9600 baud) to see output"
     print_color $CYAN "4. Check docs/TROUBLESHOOTING.md if you have issues"
     echo ""
-    print_color $GREEN "Project documentation: https://github.com/yourusername/nrf24-arduino-projects"
+    print_color $GREEN "Project documentation: https://github.com/adamivie/nrf24-arduino-projects"
     echo ""
 }
 
